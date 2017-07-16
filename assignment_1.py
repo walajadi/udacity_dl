@@ -10,6 +10,8 @@ from scipy import ndimage
 from sklearn.linear_model import LogisticRegression
 from six.moves.urllib.request import urlretrieve
 from six.moves import cPickle as pickle
+import codecs
+import time
 
 # ============================ Download ======================================================
 url = 'https://commondatastorage.googleapis.com/books1000/'
@@ -84,9 +86,13 @@ train_folders= ['./notMNIST_large/A', './notMNIST_large/B', './notMNIST_large/C'
 # test_folders = maybe_extract(test_filename)
 test_folders = ['./notMNIST_small/A', './notMNIST_small/B', './notMNIST_small/C', './notMNIST_small/D', './notMNIST_small/E', './notMNIST_small/F', './notMNIST_small/G', './notMNIST_small/H', './notMNIST_small/I', './notMNIST_small/J']
 
+# ============================= PROBLEM 1 =====================================
 # display on ipyton.
+# display single image as requested
+# Image(train_folders[2] + '/' + os.listdir(train_folders[3])[0])
 
-# img=mpimg.imread('./notMNIST_large/A/emxhZGRpLnR0Zg==.png')
+# use matplotlib to display first A letter.
+# img = mpimg.imread('./notMNIST_large/A/emxhZGRpLnR0Zg==.png') 
 # imgplot = plt.imshow(img)
 # plt.show()
 
@@ -145,4 +151,17 @@ def maybe_pickle(data_folders, min_num_images_per_class, force=False):
 
 train_datasets = maybe_pickle(train_folders, 45000)
 test_datasets = maybe_pickle(test_folders, 1800)
+
 # ===========================================================================================
+# ================================= PROBLEME 2 =====================================
+# displaying sample of labels and images from ndarray.
+def problem_2(train_datasets):
+  for train_dataset in train_datasets :
+    with codecs.open(train_dataset, 'rb') as input_f:
+      letter_set = pickle.load(input_f)
+      plt.imshow(letter_set[0])
+      plt.show()
+# ===========================================================================================
+
+
+
