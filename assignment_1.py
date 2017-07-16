@@ -153,15 +153,26 @@ train_datasets = maybe_pickle(train_folders, 45000)
 test_datasets = maybe_pickle(test_folders, 1800)
 
 # ===========================================================================================
+
 # ================================= PROBLEME 2 =====================================
 # displaying sample of labels and images from ndarray.
-def problem_2(train_datasets):
+def problem_2():
   for train_dataset in train_datasets :
     with codecs.open(train_dataset, 'rb') as input_f:
       letter_set = pickle.load(input_f)
       plt.imshow(letter_set[0])
       plt.show()
+# problem_2()
 # ===========================================================================================
 
+# ================================= PROBLEME  =====================================
+# Verify that data is balanced across classes
+def problem_3():
+  letter_order = 'ABCDEFGHIJ'
+  for index,train_dataset in enumerate(train_datasets) :
+    with codecs.open(train_dataset, 'rb') as input_f:
+      letter_set = pickle.load(input_f)
+      print('Size of data set for class ' + letter_order[index] + ': ' + str(len(letter_set)))
 
-
+problem_3()
+# ===========================================================================================
