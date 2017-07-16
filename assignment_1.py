@@ -234,10 +234,33 @@ print('Testing:', test_dataset.shape, test_labels.shape)
 
 # ===================================================================================
 # ================================= PROBLEM 4 =====================================
-random_index = idx = np.random.randint(0, len(train_dataset))
-plt.imshow(train_dataset[random_index])
-print('Letter shown : {}'.format('ABCDEFGHIJ'[train_labels[random_index]]))
-plt.show()
+# random_index = idx = np.random.randint(0, len(train_dataset))
+# plt.imshow(train_dataset[random_index])
+# print('Letter shown : {}'.format('ABCDEFGHIJ'[train_labels[random_index]]))
+# plt.show()
 # ===================================================================================
+# ======================== Save train train and test data ===========================
 
+pickle_file = 'notMNIST.pickle'
+
+try:
+  f = open(pickle_file, 'wb')
+  save = {
+    'train_dataset': train_dataset,
+    'train_labels': train_labels,
+    'valid_dataset': valid_dataset,
+    'valid_labels': valid_labels,
+    'test_dataset': test_dataset,
+    'test_labels': test_labels,
+    }
+  pickle.dump(save, f, pickle.HIGHEST_PROTOCOL)
+  f.close()
+except Exception as e:
+  print('Unable to save data to', pickle_file, ':', e)
+  raise
+
+# compress it
+statinfo = os.stat(pickle_file)
+print('Compressed pickle size:', statinfo.st_size)
+# ===================================================================================
 
